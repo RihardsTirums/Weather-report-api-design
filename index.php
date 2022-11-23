@@ -1,6 +1,5 @@
 <?php
 
-
 require_once 'vendor/autoload.php';
 
 use App\ApiClient;
@@ -17,9 +16,6 @@ $apiClient = new ApiClient($apiKey);
 
 $city = $_GET['city'] ?? 'Riga';
 $currentTime = Carbon::now();
-
-
-
 ?>
 
 <!doctype html>
@@ -58,10 +54,8 @@ $currentTime = Carbon::now();
         if ($currentWeather->getTemperature() >= 1) {
             echo '<body class ="sunny">';
             echo PHP_EOL;
-
         }
     }
-
     ?>
         <table>
             <tr>
