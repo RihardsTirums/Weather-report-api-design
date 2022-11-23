@@ -25,54 +25,8 @@ $currentTime = Carbon::now();
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <style>
-
-        body {
-            background-image: url("weather.jpg");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-        html {
-            height: 100%;
-        }
-        text {
-            font-weight: bold;
-            font-size: 13px;
-        }
-        .winter {
-            background-image: url("winter.jpg");
-        }
-
-        .sunny {
-            background-image: url("sunny.png");
-        }
-
-        a {
-            box-shadow: inset 0 0 0 0 #cc0533;
-            color: #15090b;
-            margin: 0 -.25rem;
-            padding: 0 .25rem;
-            transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
-            font-size: 20px;
-
-
-        }
-        a:hover {
-            box-shadow: inset 100px 0 0 0 #a6021b;
-            color: black;
-        }
-        #search{
-            padding-top: 0.8%;
-        }
-        table{
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 30px;
-            font-family: Ani, serif;
-
-        }
-
     </style>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -90,7 +44,7 @@ $currentTime = Carbon::now();
         </label>
         <input type="submit" value="Get Weather"><br>
     <?php
-    $currentWeather = $weather = $apiClient->getWeather($city);
+    $currentWeather = $apiClient->getWeather($city);
     if (isset($currentWeather)) {
 
         echo PHP_EOL;
