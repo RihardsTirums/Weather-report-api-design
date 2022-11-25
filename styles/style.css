@@ -1,5 +1,5 @@
 body {
-    background-image: url("weather.jpg");
+    background-image: url("../img/weather.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -11,11 +11,11 @@ text {
     font-size: 13px;
 }
 .winter {
-    background-image: url("winter.jpg");
+    background-image: url("../img/winter.jpg");
 }
 
 .sunny {
-    background-image: url("sunny.png");
+    background-image: url("../img/sunny.png");
 }
 
 a {

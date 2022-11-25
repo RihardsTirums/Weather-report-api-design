@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace App;
+use App\Models\Location;
+use App\Models\Weather;
 
 class ApiClient {
 

@@ -5,6 +5,41 @@ require_once 'vendor/autoload.php';
 use App\ApiClient;
 use Carbon\Carbon;
 
+$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $route) {
+    $route->addRoute('GET', '/weather', '?city');
+    $route->addRoute('GET', '/Riga', '?city');
+
+});
+
+// Fetch method and URI from somewhere
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
+
+// Strip query string (?foo=bar) and decode URI
+if (false !== $pos = strpos($uri, '?')) {
+    $uri = substr($uri, 0, $pos);
+}
+$uri = rawurldecode($uri);
+
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        echo "Error 404 Not Found";
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        echo "Error 405 Method Not Allowed";
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        // ... call $handler with $vars
+        [$controller, $method] = $handler;
+        (new $controller)->{$method}();
+        break;
+}
+
+
 $apiKey = ''; //  <-------- ENTER YOU'RE API KEY
 
 //$chosenLocation = readline('What city you want to check? ');
@@ -21,7 +56,7 @@ $currentTime = Carbon::now();
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <style>
     </style>
     <meta charset="UTF-8">
@@ -31,8 +66,8 @@ $currentTime = Carbon::now();
     <title>Weather report</title>
 </head>
 <body>
-    <a href="/?city=Riga">Riga</a> | <a href="/?city=Vilnius">Vilnius</a> | <a href="/?city=Tallinn">Tallinn</a> | <a href="/?city=Ondangwa">Ondangwa</a>|
-    <a href="/?city=Volochanka">Volochanka</a>
+    <a href="/Riga">Riga</a> | <a href="/Vilnius">Vilnius</a> | <a href="/Tallinn">Tallinn</a> | <a href="/Ondangwa">Ondangwa</a>|
+    <a href="/Volochanka">Volochanka</a>
 
     <form id="search" action="index.php" method="get">
     Search weather by city: <label>
